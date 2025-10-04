@@ -1,0 +1,149 @@
+:root {
+    --dropdown-width-sm: 140px;
+    --dropdown-btn-height: 42px;
+    --dropdown-border-color: #E4E4E4;
+    --dropdown-border-active: #099D3E;
+    --dropdown-gap: 6px;
+    --radius: 8px;
+    --item-height: 41px;
+    --item-pt: 10px;
+    --item-pl: 16px;
+    --btn-pt: 8px;
+    --btn-pl: 16px;
+    --transition: 0.22s ease;
+    --font-size: 14px;
+}
+
+/* Wrapper: independent container */
+.custom-select {
+    position: relative;
+    display: inline-block;
+    min-width: var(--dropdown-width-sm);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Dropdown menu default override */
+.dropdown-menu {
+    --bs-dropdown-min-width: none !important;
+}
+
+/* Button */
+.custom-select__button {
+    width: 100%;
+    height: var(--dropdown-btn-height);
+    display: flex;
+    gap: var(--dropdown-gap);
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--btn-pt) var(--btn-pl);
+    border: 1px solid var(--dropdown-border-color);
+    border-radius: var(--radius);
+    background: #ffffff;
+    color: #111827;
+    font-size: var(--font-size);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+/* Focus */
+.custom-select__button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(9, 157, 62, 0.12);
+}
+
+/* Remove default Bootstrap arrow */
+.custom-select__button::after {
+    display: none;
+}
+
+/* Chevron */
+.custom-select__chev {
+    transition: transform var(--transition);
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    color: #5E5E5E;
+}
+
+/* Rotate chevron on open */
+.custom-select__button[aria-expanded="true"] .custom-select__chev {
+    transform: rotate(180deg);
+}
+
+/* Menu */
+.custom-select__menu {
+    position: absolute;
+    top: var(--dropdown-gap) !important;
+    left: 0;
+    z-index: 2000;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: var(--radius);
+    border: 0.5px solid var(--dropdown-border-color);
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    list-style: none;
+}
+
+/* Show menu */
+.custom-select__menu.show {
+    display: block !important;
+}
+
+/* Menu items */
+.custom-select__menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    height: var(--item-height);
+    padding: var(--item-pt) 12px var(--item-pt) var(--item-pl);
+    font-size: var(--font-size);
+    color: #111827;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: background 0.15s ease;
+}
+
+/* Hover & focus */
+.custom-select__menu .dropdown-item:hover,
+.custom-select__menu li:hover,
+.custom-select__menu li:focus {
+    background: #F5F7F9;
+    outline: none;
+}
+
+/* Round corners for first/last items */
+.custom-select__menu li:first-child .dropdown-item {
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+}
+
+.custom-select__menu li:last-child .dropdown-item {
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+}
+
+/* Active / selected item */
+.custom-select__menu .dropdown-item[aria-selected="true"] {
+    background: rgba(9, 157, 62, 0.08);
+    color: #099D3E;
+}
+
+/* Optional: smooth hover transition for button background */
+.custom-select__button:hover {
+    background: #F8FAFC;
+}
+
+/* Optional: style images/icons inside items consistently */
+.custom-select__menu .dropdown-item img,
+.custom-select__menu .dropdown-item i {
+    display: inline-block;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}

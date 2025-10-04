@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?mrmni5');
+    src: url('./fonts/icomoon.eot?mrmni5#iefix') format('embedded-opentype'),
+        url('./fonts/icomoon.ttf?mrmni5') format('truetype'),
+        url('./fonts/icomoon.woff?mrmni5') format('woff'),
+        url('./fonts/icomoon.svg?mrmni5#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak-as: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Allahabad-Bank:before {
+    content: "\e901";
+    color: #00a0e4;
+}
+
+.icon-City-Union-Bank:before {
+    content: "\e902";
+    color: #2e3192;
+}
+
+.icon-HDFC .path1:before {
+    content: "\e903";
+    color: rgb(237, 35, 42);
+}
+
+.icon-HDFC .path2:before {
+    content: "\e904";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+}
+
+.icon-HDFC .path3:before {
+    content: "\e905";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+}
+
+.icon-HDFC .path4:before {
+    content: "\e906";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+}
+
+.icon-HDFC .path5:before {
+    content: "\e907";
+    margin-left: -1em;
+    color: rgb(0, 76, 143);
+}
+
+.icon-IDBI-Bank:before {
+    content: "\e908";
+    color: #f58220;
+}
+
+.icon-Union-Bank-of-India .path1:before {
+    content: "\e909";
+    color: rgb(0, 87, 156);
+}
+
+.icon-Union-Bank-of-India .path2:before {
+    content: "\e90a";
+    margin-left: -1em;
+    color: rgb(218, 37, 28);
+}
+
+.icon-Yes-Bank-Limited:before {
+    content: "\e90b";
+    color: #cb2448;
+}
+
+.icon-Vector:before {
+    content: "\e900";
+}

@@ -1,0 +1,206 @@
+:root {
+    /* Default small dropdown variables */
+    --dropdown-btn-height: 42px;
+    --dropdown-border-color: #E4E4E4;
+    --dropdown-gap: 6px;
+    --radius: 8px;
+    --item-height: 41px;
+    --item-pt: 10px;
+    --item-pl: 16px;
+    --btn-pt: 8px;
+    --btn-pl: 16px;
+    --transition: 0.22s ease;
+    --font-size: 14px;
+    --btn-width: 140px;
+    --img-size: 20px;
+}
+
+/* Large dropdown overrides */
+.custom-select-lg {
+    --dropdown-btn-height: 42px;
+    --dropdown-gap: 8px;
+    --item-height: 40px;
+    --item-pt: 12px;
+    --item-pl: 16px;
+    --btn-width: 567px;
+    --img-size: 16px;
+}
+
+/* Wrapper */
+.custom-select {
+    position: relative;
+    display: inline-block;
+    min-width: var(--btn-width);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Button */
+.custom-select__button {
+    width: 100%;
+    height: var(--dropdown-btn-height);
+    display: flex;
+    gap: var(--dropdown-gap);
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--btn-pt) var(--btn-pl);
+    border: 1px solid var(--dropdown-border-color);
+    border-radius: var(--radius);
+    background: #fff;
+    font-size: var(--font-size);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.custom-select__button:hover {
+    background: #F8FAFC;
+    border-color: #099D3E;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.custom-select__button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(9, 157, 62, 0.12);
+}
+
+.custom-select__button::after {
+    display: none;
+}
+
+/* Chevron */
+.custom-select__chev {
+    transition: transform var(--transition);
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    color: #5E5E5E;
+}
+
+.custom-select__button[aria-expanded="true"] .custom-select__chev {
+    transform: rotate(180deg);
+}
+
+/* Menu */
+.custom-select__menu {
+    position: absolute;
+    top: var(--dropdown-gap) !important;
+    left: 0;
+    z-index: 2000;
+    width: 100%;
+    margin: 0;
+    padding: 4px 0;
+    border-radius: var(--radius);
+    border: 0.5px solid var(--dropdown-border-color);
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    list-style: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity var(--transition), transform var(--transition);
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.custom-select__menu.show {
+    display: block !important;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Items */
+.custom-select__menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    height: var(--item-height);
+    padding: var(--item-pt) 16px;
+    font-size: var(--font-size);
+    color: #111827;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: var(--radius);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.custom-select__menu .dropdown-item:hover,
+.custom-select__menu li:hover,
+.custom-select__menu li:focus {
+    background: #F5F7F9;
+    color: #099D3E;
+    outline: none;
+}
+
+.custom-select__menu .dropdown-item[aria-selected="true"] {
+    background: rgba(9, 157, 62, 0.1);
+    color: #099D3E;
+}
+
+/* Round corners for first/last items */
+.custom-select__menu li:first-child .dropdown-item {
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+}
+
+.custom-select__menu li:last-child .dropdown-item {
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+}
+
+/* Menu icons */
+.custom-select__menu .dropdown-item img,
+.custom-select__menu .dropdown-item i {
+    width: var(--img-size);
+    height: var(--img-size);
+    object-fit: contain;
+}
+
+/* --- NEW: Large dropdown icon + text alignment --- */
+.custom-select-lg .dropdown-item {
+    display: flex;
+    align-items: center;
+    /* vertical center */
+    gap: 10px;
+    /* space between icon and text */
+}
+
+.custom-select-lg .dropdown-item i,
+.custom-select-lg .dropdown-item span {
+    display: inline-flex;
+    align-items: center;
+    /* vertical center */
+}
+
+/* Selected label inside button */
+.custom-select__button [data-select-label] {
+    display: flex;
+    align-items: center;
+    /* vertical center */
+    gap: 10px;
+    /* gap between icon and text */
+    flex: 1;
+    /* occupy remaining space */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Optional: add spacing before chevron */
+.custom-select__button [data-select-label]>span,
+.custom-select__button [data-select-label]>i {
+    margin-right: 0;
+    /* reset margin if any */
+}
+
+/* Chevron spacing */
+.custom-select__chev {
+    margin-left: 10px;
+    /* equivalent to me-2 */
+}
+
+.dropdown-menu.custom-select__menu {
+    --bs-dropdown-min-width: auto;
+}

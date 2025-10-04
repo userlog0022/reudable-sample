@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reusable Components</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-4">
+
+    <h1>My App with Reusable Components</h1>
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { createButton, createCard, createModal } from "./components.js";
+
+        const app = document.getElementById("app");
+
+        // Buttons
+        app.appendChild(createButton("Save", "success", () => alert("Saved!")));
+        app.appendChild(createButton("Cancel", "danger", () => alert("Cancelled!")));
+
+        // Card
+        app.appendChild(createCard("User Profile", "This is a reusable card.", "Updated just now"));
+
+        // Modal (created once)
+        const myModal = createModal("infoModal", "Info", "Reusable modal component!");
+
+        // Separate Button to trigger modal
+        const modalBtn = createButton("Open Modal", "primary", () => myModal.show());
+        app.appendChild(modalBtn);
+    </script>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dropdown — chevron rotation + adaptive width</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* base/default width */
+        :root {
+            --dd-default-width: 140px;
+        }
+
+        /* Same width for toggle + menu */
+        .custom-dropdown-toggle,
+        .custom-dropdown-menu {
+            width: var(--dd-default-width);
+            min-width: var(--dd-default-width);
+        }
+
+        /* Remove Bootstrap's default caret */
+        .custom-dropdown-toggle::after {
+            display: none !important;
+        }
+
+        /* Toggle button layout */
+        .custom-dropdown-toggle {
+            height: 42px;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+            padding: 8px 12px 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .custom-dropdown-toggle:focus,
+        .custom-dropdown-toggle.open {
+            border-color: #099D3E;
+            outline: none;
+            box-shadow: 0 0 0 0.1rem rgba(9, 157, 62, 0.25);
+        }
+
+        /* label inside toggle — allows ellipsis when small */
+        .dropdown-label {
+            display: inline-block;
+            flex: 1 1 auto;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+            color: #111;
+        }
+
+        /* icon area */
+        .dropdown-icon {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .dropdown-icon i {
+            transition: transform 0.22s ease;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .custom-dropdown-toggle.open .dropdown-icon i {
+            transform: rotate(180deg);
+        }
+
+        /* Menu without scroll */
+        .custom-dropdown-menu {
+            border-radius: 8px;
+            border: 0.5px solid #E0E0E0;
+            opacity: 1;
+            padding: 0;
+            margin-top: 6px !important;
+            /* exact gap */
+            /* removed height and overflow to disable scroll */
+        }
+
+        /* Items */
+        .custom-dropdown-menu .dropdown-item {
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .custom-dropdown-menu .dropdown-item:hover,
+        .custom-dropdown-menu .dropdown-item:focus {
+            background-color: #f5f5f5;
+        }
+
+        /* visual selected state in list */
+        .custom-dropdown-menu .dropdown-item.active,
+        .custom-dropdown-menu .dropdown-item[aria-selected="true"] {
+            background-color: #e9f7ee;
+        }
+    </style>
+</head>
+
+<body class="p-5">
+
+    <div class="dropdown" id="customDropdown">
+        <!-- Toggle -->
+        <button id="customDropdownButton" class="custom-dropdown-toggle dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+            <span class="dropdown-label">Last 7 Days</span>
+            <span class="dropdown-icon"><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+        </button>
+
+        <!-- Menu -->
+        <ul id="customDropdownMenu" class="dropdown-menu custom-dropdown-menu" aria-labelledby="customDropdownButton"
+            role="menu">
+            <li><button class="dropdown-item" role="menuitem">Last 7 Days</button></li>
+            <li><button class="dropdown-item" role="menuitem">Last 30 Days</button></li>
+            <li><button class="dropdown-item" role="menuitem">Last 6 Months</button></li>
+            <li><button class="dropdown-item" role="menuitem">Custom Date </button></li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const wrapper = document.getElementById('customDropdown');
+            const toggle = document.getElementById('customDropdownButton');
+            const menu = document.getElementById('customDropdownMenu');
+            const label = toggle.querySelector('.dropdown-label');
+            const items = menu.querySelectorAll('.dropdown-item');
+
+            // Add/remove 'open' class when dropdown opens/closes for chevron rotation
+            wrapper.addEventListener('shown.bs.dropdown', () => toggle.classList.add('open'));
+            wrapper.addEventListener('hidden.bs.dropdown', () => toggle.classList.remove('open'));
+
+            // selection handlers (update label)
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const text = item.textContent.trim();
+                    label.textContent = text;
+
+                    // mark selected item
+                    items.forEach(i => {
+                        i.setAttribute('aria-selected', 'false');
+                        i.classList.remove('active');
+                    });
+                    item.setAttribute('aria-selected', 'true');
+                    item.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
